@@ -13,7 +13,7 @@
  * @param env
  * @return
  */
-jboolean specialFilesEmulatorcheck(JNIEnv *env) {
+jboolean specialFilesEmulatorcheck() {
 
     if (exists("/system/lib/libdroid4x.so") // 文卓爷
         || exists("/system/bin/windroyed") // 文卓爷

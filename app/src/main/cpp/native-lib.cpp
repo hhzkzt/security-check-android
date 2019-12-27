@@ -15,7 +15,7 @@ extern "C"
 JNIEXPORT jboolean JNICALL
 Java_com_song_check_activity_EmulatorActivity_specialFilesEmulatorcheck(JNIEnv *env,
                                                                         jobject instance) {
-    return specialFilesEmulatorcheck(env);
+    return specialFilesEmulatorcheck();
 }
 
 extern "C"

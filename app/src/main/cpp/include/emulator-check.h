@@ -12,7 +12,7 @@
  * @param env
  * @return
  */
-jboolean specialFilesEmulatorcheck(JNIEnv *env);
+jboolean specialFilesEmulatorcheck();
 
 /**
  * 检测特殊目录，/sys/class/thermal/thermal_zoneX/temp(温度挂载文件)
