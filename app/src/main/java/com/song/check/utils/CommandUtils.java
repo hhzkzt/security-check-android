@@ -4,26 +4,18 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
-public class CommandUtil {
-    private CommandUtil() {
-    }
+public class CommandUtils {
 
-    private static class SingletonHolder {
-        private static final CommandUtil INSTANCE = new CommandUtil();
-    }
-
-    public static final CommandUtil getSingleInstance() {
-        return SingletonHolder.INSTANCE;
-    }
-
-    public String getProperty(String propName) {
+    public static String getProperty(String propName) {
         String value = null;
         Object roSecureObj;
         try {
             roSecureObj = Class.forName("android.os.SystemProperties")
                     .getMethod("get", String.class)
                     .invoke(null, propName);
-            if (roSecureObj != null) value = (String) roSecureObj;
+            if (roSecureObj != null) {
+                value = (String) roSecureObj;
+            }
         } catch (Exception e) {
             value = null;
         } finally {
@@ -31,7 +23,7 @@ public class CommandUtil {
         }
     }
 
-    public String exec(String command) {
+    public static String execute(String command) {
         BufferedOutputStream bufferedOutputStream = null;
         BufferedInputStream bufferedInputStream = null;
         Process process = null;
@@ -44,13 +36,10 @@ public class CommandUtil {
             bufferedOutputStream.write('\n');
             bufferedOutputStream.flush();
             bufferedOutputStream.close();
-
             process.waitFor();
-
-            String outputStr = getStrFromBufferInputSteam(bufferedInputStream);
-            return outputStr;
+            return readFromInputStream(bufferedInputStream);
         } catch (Exception e) {
-            return null;
+            return Constants.UNKNOWN;
         } finally {
             if (bufferedOutputStream != null) {
                 try {
@@ -72,26 +61,21 @@ public class CommandUtil {
         }
     }
 
-    private static String getStrFromBufferInputSteam(BufferedInputStream bufferedInputStream) {
+    private static String readFromInputStream(BufferedInputStream bufferedInputStream) {
         if (null == bufferedInputStream) {
-            return "";
+            return Constants.UNKNOWN;
         }
-        int BUFFER_SIZE = 512;
+        int BUFFER_SIZE = 1024;
         byte[] buffer = new byte[BUFFER_SIZE];
-        StringBuilder result = new StringBuilder();
+        StringBuilder sb = new StringBuilder();
         try {
-            while (true) {
-                int read = bufferedInputStream.read(buffer);
-                if (read > 0) {
-                    result.append(new String(buffer, 0, read));
-                }
-                if (read < BUFFER_SIZE) {
-                    break;
-                }
+            int len = 0;
+            while ((len = bufferedInputStream.read(buffer)) != -1) {
+                sb.append(new String(buffer, 0, len));
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return result.toString();
+        return sb.toString();
     }
 }

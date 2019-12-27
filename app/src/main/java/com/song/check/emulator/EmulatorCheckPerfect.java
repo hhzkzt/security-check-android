@@ -3,7 +3,7 @@ package com.song.check.emulator;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.song.check.utils.CommandUtil;
+import com.song.check.utils.CommandUtils;
 import com.song.check.utils.ReflectUtils;
 
 import java.io.File;
@@ -153,15 +153,15 @@ public class EmulatorCheckPerfect {
         if (abilist.contains("x86")) {
             return true;
         }
-        String arch = CommandUtil.getSingleInstance().exec("uname -m");
+        String arch = CommandUtils.execute("uname -m");
         if (arch.contains("i686")) {
             return true;
         }
-        String su = CommandUtil.getSingleInstance().exec("su -v");
+        String su = CommandUtils.execute("su -v");
         if (TextUtils.equals("16 com.android.settings", su)) {
             return true;
         }
-        String sound = CommandUtil.getSingleInstance().exec("cat /proc/asound/card0/id");
+        String sound = CommandUtils.execute("cat /proc/asound/card0/id");
         if (TextUtils.equals("I82801AAICH", sound)) {
             return true;
         }
@@ -175,7 +175,7 @@ public class EmulatorCheckPerfect {
      * @return
      */
     public static boolean checkCpuInfo() {
-        String cpuinfo = CommandUtil.getSingleInstance().exec("cat /proc/cpuinfo");
+        String cpuinfo = CommandUtils.execute("cat /proc/cpuinfo");
         if (cpuinfo.contains("intel") ||
                 cpuinfo.contains("amd")) {
             return true;

@@ -6,7 +6,7 @@ import android.hardware.Sensor;
 import android.hardware.SensorManager;
 import android.text.TextUtils;
 
-import com.song.check.utils.CommandUtil;
+import com.song.check.utils.CommandUtils;
 
 import static android.content.Context.SENSOR_SERVICE;
 import static com.song.check.emulator.CheckResult.RESULT_EMULATOR;
@@ -175,7 +175,7 @@ public class EmulatorCheckTwo {
     }
 
     private String getProperty(String propName) {
-        String property = CommandUtil.getSingleInstance().getProperty(propName);
+        String property = CommandUtils.getProperty(propName);
         return TextUtils.isEmpty(property) ? null : property;
     }
 
@@ -350,7 +350,7 @@ public class EmulatorCheckTwo {
      * 获取已安装第三方应用数量
      */
     private int getUserAppNumber() {
-        String userApps = CommandUtil.getSingleInstance().exec("pm list package -3");
+        String userApps = CommandUtils.execute("pm list package -3");
         return getUserAppNum(userApps);
     }
 
@@ -400,7 +400,7 @@ public class EmulatorCheckTwo {
      * 特征参数-进程组信息
      */
     private CheckResult checkFeaturesByCgroup() {
-        String filter = CommandUtil.getSingleInstance().exec("cat /proc/self/cgroup");
+        String filter = CommandUtils.execute("cat /proc/self/cgroup");
         if (null == filter) {
             return new CheckResult(RESULT_MAYBE_EMULATOR, null);
         }
