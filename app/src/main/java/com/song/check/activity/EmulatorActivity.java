@@ -22,6 +22,11 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
     private Button pipCheckBtn;
     private Button buildInfoBtn;
 
+    private Button fileCheckJniBtn;
+    private Button thermalCheckJniBtn;
+    private Button buildCheckJniBtn;
+    private Button bluetoothCheckJniBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,12 +39,22 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
         pipCheckBtn = ((Button) findViewById(R.id.btn_pip_check));
         buildInfoBtn = ((Button) findViewById(R.id.btn_build_info));
 
+        fileCheckJniBtn = ((Button) findViewById(R.id.btn_jni_file_check));
+        thermalCheckJniBtn = ((Button) findViewById(R.id.btn_jni_thermal_check));
+        buildCheckJniBtn = ((Button) findViewById(R.id.btn_jni_build_check));
+        bluetoothCheckJniBtn = ((Button) findViewById(R.id.btn_jni_bluetooth_check));
+
         buildCheckBtn.setOnClickListener(this);
         qemuCheckBtn.setOnClickListener(this);
         propertyCheckBtn.setOnClickListener(this);
         cpuCheckBtn.setOnClickListener(this);
         pipCheckBtn.setOnClickListener(this);
         buildInfoBtn.setOnClickListener(this);
+
+        fileCheckJniBtn.setOnClickListener(this);
+        thermalCheckJniBtn.setOnClickListener(this);
+        buildCheckJniBtn.setOnClickListener(this);
+        bluetoothCheckJniBtn.setOnClickListener(this);
     }
 
     @Override
@@ -70,9 +85,37 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
                 Log.i(TAG, deviceInfo);
                 Toast.makeText(this, deviceInfo, Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.btn_jni_file_check:
+                boolean filesEmulatorcheck = specialFilesEmulatorcheck();
+                Log.i(TAG, "filesEmulatorcheck: " + filesEmulatorcheck);
+                Toast.makeText(this, "" + filesEmulatorcheck, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_jni_thermal_check:
+                boolean thermalCheck = thermalCheck();
+                Log.i(TAG, "thermalCheck: " + thermalCheck);
+                Toast.makeText(this, "thermalCheck: " + thermalCheck, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_jni_build_check:
+                boolean buildCheck = buildCheck();
+                Log.i(TAG, "buildCheck: " + buildCheck);
+                Toast.makeText(this, "buildCheck: " + buildCheck, Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.btn_jni_bluetooth_check:
+                boolean bluetoothCheck = bluetoothCheck();
+                Log.i(TAG, "bluetoothCheck: " + bluetoothCheck);
+                Toast.makeText(this, "bluetoothCheck: " + bluetoothCheck, Toast.LENGTH_SHORT).show();
+                break;
             default:
                 break;
         }
 
     }
+
+    public native boolean specialFilesEmulatorcheck();
+
+    public native boolean thermalCheck();
+
+    public native boolean buildCheck();
+
+    public native boolean bluetoothCheck();
 }
