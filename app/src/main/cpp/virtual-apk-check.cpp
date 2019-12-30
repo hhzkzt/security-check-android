@@ -1,0 +1,59 @@
+//
+// 多开 app 检测
+// Created by 陈颂颂 on 2019/12/30.
+//
+
+#include <cstdio>
+#include "include/virtual-apk-check.h"
+#include "include/utils.h"
+#include "include/log.h"
+#include "include/app-utils.h"
+#include <string.h>
+
+/**
+ * 0. 多开检测 false
+ * 1. 多开检测 true
+ * 2. 检测失败（$unknown）
+ * 检测多开
+ * @return
+ */
+int moreOpenCheck() {
+
+    // 判断是否支持ls命令
+    if (exists("/system/bin/ls")) {
+
+        char packageName[BUF_SIZE_64] = UNKNOWN;
+        if (getPackageName(packageName) != 0) {
+            return 2;
+        }
+
+        char path[BUF_SIZE_128];
+        sprintf(path, "ls /data/data/%s", packageName);
+
+        FILE *f = NULL;
+        f = popen(path, "r");
+        if (f == NULL) {
+            LOGD("file pointer is null.");
+            return 2;
+        } else {
+            // 读取 shell 命令内容
+            char buff[BUF_SIZE_32];
+            if (fgets(buff, BUF_SIZE_32, f) == NULL) {
+                LOGD("ls data error.");
+                pclose(f);
+                return 1;
+            }
+            LOGD("ls data: %s", buff);
+            if (strlen(buff) == 0) {
+                pclose(f);
+                return 1;
+            } else {
+                pclose(f);
+                return 0;
+            }
+        }
+
+    } else {
+        return 2;
+    }
+}
