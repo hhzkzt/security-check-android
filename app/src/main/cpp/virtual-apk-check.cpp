@@ -9,12 +9,13 @@
 #include "include/log.h"
 #include "include/app-utils.h"
 #include <string.h>
+#include <errno.h>
 
 /**
  * 0. 多开检测 false
  * 1. 多开检测 true
  * 2. 检测失败（$unknown）
- * 检测多开
+ * 检测多开, 若可访问规定目录则为正常，否则为多开环境
  * @return
  */
 int moreOpenCheck() {
@@ -39,7 +40,7 @@ int moreOpenCheck() {
             // 读取 shell 命令内容
             char buff[BUF_SIZE_32];
             if (fgets(buff, BUF_SIZE_32, f) == NULL) {
-                LOGD("ls data error.");
+                LOGD("ls data error: %s", strerror(errno));
                 pclose(f);
                 return 1;
             }

@@ -14,4 +14,12 @@ public class ExampleUnitTest {
     public void addition_isCorrect() {
         assertEquals(4, 2 + 2);
     }
+
+    @Test
+    public void test_length(){
+
+        String data = "com.zjwh.android_wh_physicalfitness";
+        System.out.println(data.length());
+
+    }
 }
