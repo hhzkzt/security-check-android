@@ -12,11 +12,9 @@ public class ReflectUtils {
      */
     public static String getProperty(String property) {
         try {
-            // ClassLoader cl = context.getClassLoader();
             ClassLoader cl = ClassLoader.getSystemClassLoader();
-//            Class<?> systemProperties = cl.loadClass("android.os.SystemProperties");
-            Class<?> systemProperties = cl.loadClass("android.os.Build");
-            Method method = systemProperties.getMethod("getString", String.class);
+            Class<?> systemProperties = cl.loadClass("android.os.SystemProperties");
+            Method method = systemProperties.getMethod("get", String.class);
             method.setAccessible(true);
             Object[] params = new Object[1];
             params[0] = property;

@@ -1,13 +1,13 @@
 package com.song.check.activity;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
 import com.song.check.R;
 import com.song.check.emulator.EmulatorCheckPerfect;
+import com.song.check.utils.LogUtils;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -78,27 +78,27 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
                 break;
             case R.id.btn_build_info:
                 String deviceInfo = EmulatorCheckPerfect.getDeviceInfo();
-                Log.i(TAG, deviceInfo);
+                LogUtils.i(TAG, deviceInfo);
                 Toast.makeText(this, deviceInfo, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_jni_file_check:
                 boolean filesEmulatorcheck = specialFilesEmulatorcheck();
-                Log.i(TAG, "filesEmulatorcheck: " + filesEmulatorcheck);
+                LogUtils.i(TAG, "filesEmulatorcheck: " + filesEmulatorcheck);
                 Toast.makeText(this, "" + filesEmulatorcheck, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_jni_thermal_check:
                 boolean thermalCheck = thermalCheck();
-                Log.i(TAG, "thermalCheck: " + thermalCheck);
+                LogUtils.i(TAG, "thermalCheck: " + thermalCheck);
                 Toast.makeText(this, "thermalCheck: " + thermalCheck, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_jni_build_check:
                 boolean buildCheck = buildCheck();
-                Log.i(TAG, "buildCheck: " + buildCheck);
+                LogUtils.i(TAG, "buildCheck: " + buildCheck);
                 Toast.makeText(this, "buildCheck: " + buildCheck, Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_jni_bluetooth_check:
                 boolean bluetoothCheck = bluetoothCheck();
-                Log.i(TAG, "bluetoothCheck: " + bluetoothCheck);
+                LogUtils.i(TAG, "bluetoothCheck: " + bluetoothCheck);
                 Toast.makeText(this, "bluetoothCheck: " + bluetoothCheck, Toast.LENGTH_SHORT).show();
                 break;
             default:

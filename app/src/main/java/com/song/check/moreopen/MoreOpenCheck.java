@@ -3,10 +3,9 @@ package com.song.check.moreopen;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
-import android.util.Log;
 
 import com.song.check.utils.CommandUtils;
-import com.song.check.utils.Constants;
+import com.song.check.utils.LogUtils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,7 +36,7 @@ public class MoreOpenCheck {
             return false;
         }
 
-        Log.d(Constants.TAG, result);
+        LogUtils.d(result);
 
         String[] lines = result.split("\n");
         if (lines == null || lines.length <= 0) {
