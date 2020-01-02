@@ -28,11 +28,11 @@ int rootCheck(char *dest) {
         LOGD("su -v: %s", dest);
         if (strlen(dest) == 0) {
             pclose(f);
-            LOGD("this is rooted.");
+            LOGD("this not is root.");
             return 0;
         } else {
             pclose(f);
-            LOGD("this not is root.");
+            LOGD("this is rooted.");
             return 1;
         }
     } else {
