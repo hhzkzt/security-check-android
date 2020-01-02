@@ -4,24 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.IOException;
 
+/**
+ * Created by chensongsong on 2020/1/2.
+ */
 public class CommandUtils {
-
-    public static String getProperty(String propName) {
-        String value = null;
-        Object roSecureObj;
-        try {
-            roSecureObj = Class.forName("android.os.SystemProperties")
-                    .getMethod("get", String.class)
-                    .invoke(null, propName);
-            if (roSecureObj != null) {
-                value = (String) roSecureObj;
-            }
-        } catch (Exception e) {
-            value = null;
-        } finally {
-            return value;
-        }
-    }
 
     public static String execute(String command) {
         BufferedOutputStream bufferedOutputStream = null;

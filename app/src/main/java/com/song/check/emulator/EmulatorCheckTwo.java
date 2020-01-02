@@ -7,6 +7,7 @@ import android.hardware.SensorManager;
 import android.text.TextUtils;
 
 import com.song.check.utils.CommandUtils;
+import com.song.check.utils.ReflectUtils;
 
 import static android.content.Context.SENSOR_SERVICE;
 import static com.song.check.emulator.CheckResult.RESULT_EMULATOR;
@@ -175,7 +176,7 @@ public class EmulatorCheckTwo {
     }
 
     private String getProperty(String propName) {
-        String property = CommandUtils.getProperty(propName);
+        String property = ReflectUtils.getProperty(propName);
         return TextUtils.isEmpty(property) ? null : property;
     }
 

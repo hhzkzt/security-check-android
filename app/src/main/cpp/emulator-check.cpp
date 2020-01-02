@@ -40,7 +40,7 @@ jboolean thermalCheck() {
     struct dirent *entry;
 
     if ((dirptr = opendir("/sys/class/thermal/")) != NULL) {
-        while (entry = readdir(dirptr)) {
+        while ((entry = readdir(dirptr))) {
             LOGE("%s  \n", entry->d_name);
             if (!strcmp(entry->d_name, ".") || !strcmp(entry->d_name, "..")) {
                 continue;
