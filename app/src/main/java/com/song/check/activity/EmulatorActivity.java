@@ -65,19 +65,15 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
                 Toast.makeText(this, "build check: " + EmulatorCheckPerfect.buildCheck(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_qemu_check:
-                EmulatorCheckPerfect.qemuCheck();
                 Toast.makeText(this, "qemu check: " + EmulatorCheckPerfect.qemuCheck(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_property_check:
-                EmulatorCheckPerfect.checkSystemProperty();
                 Toast.makeText(this, "property check: " + EmulatorCheckPerfect.checkSystemProperty(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_cpu_check:
-                EmulatorCheckPerfect.checkCpuInfo();
                 Toast.makeText(this, "cpuinfo check: " + EmulatorCheckPerfect.checkCpuInfo(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_pip_check:
-                EmulatorCheckPerfect.checkPipes();
                 Toast.makeText(this, "pips check: " + EmulatorCheckPerfect.checkPipes(), Toast.LENGTH_SHORT).show();
                 break;
             case R.id.btn_build_info:

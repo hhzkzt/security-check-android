@@ -7,6 +7,15 @@
 
 #include <zconf.h>
 
+#define BUF_SIZE_32 32
+#define BUF_SIZE_64 64
+#define BUF_SIZE_128 128
+#define BUF_SIZE_256 256
+#define BUF_SIZE_512 512
+#define BUF_SIZE_1024 1024
+
+#define UNKNOWN "$unknown"
+
 /**
  * path: 路径
  * 返回值 1:文件存在; 0:文件不存在
