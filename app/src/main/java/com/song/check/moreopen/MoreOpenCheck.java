@@ -3,8 +3,10 @@ package com.song.check.moreopen;
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.util.Log;
 
 import com.song.check.utils.CommandUtils;
+import com.song.check.utils.Constants;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -21,6 +23,7 @@ public class MoreOpenCheck {
 
     /**
      * 进程检测，若出现同一个 uid 下出现的进程名对应 /data/data/pkg 私有目录，超出 1 个则为多开
+     * 需要排除当前进程名存在多个情况
      *
      * @return
      * @deprecated 当前方案在 6.0 以上机型不可用，因为只能获取当前 uid 进程列表
@@ -33,6 +36,8 @@ public class MoreOpenCheck {
         if (result == null || result.isEmpty()) {
             return false;
         }
+
+        Log.d(Constants.TAG, result);
 
         String[] lines = result.split("\n");
         if (lines == null || lines.length <= 0) {
@@ -128,7 +133,7 @@ public class MoreOpenCheck {
      *
      * @param context
      * @return
-     * @deprecated 大部分多开软件一键绕过
+     * @deprecated 大部分多开软件已经绕过
      */
     public static boolean packageCheck(Context context) {
 
@@ -153,6 +158,7 @@ public class MoreOpenCheck {
 
     /**
      * 获取系统 binder 服务数量，若保持在 140 左右则为多开
+     *
      * @return
      */
     public static boolean getSystemServer() {
