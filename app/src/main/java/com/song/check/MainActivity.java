@@ -4,14 +4,18 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.song.check.activity.DebugActivity;
 import com.song.check.activity.EmulatorActivity;
 import com.song.check.activity.HookActivity;
 import com.song.check.activity.MoreOpenActivity;
 import com.song.check.activity.RootActivity;
+import com.song.check.utils.Constants;
 
 import androidx.appcompat.app.AppCompatActivity;
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -26,10 +30,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private Button hookCheckBtn;
     private Button debugCheckbtn;
 
+    @BindView(R.id.tv_version)
+    TextView versionTv;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        ButterKnife.bind(this);
+
+        versionTv.setText(Constants.VERSION);
 
         emulatorCheckBtn = ((Button) findViewById(R.id.btn_emulator_check));
         moreOpenCheckBtn = ((Button) findViewById(R.id.btn_more_open_check));
@@ -43,14 +53,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         hookCheckBtn.setOnClickListener(this);
         debugCheckbtn.setOnClickListener(this);
 
-        // Example of a call to a native method
     }
-
-    /**
-     * A native method that is implemented by the 'native-lib' native library,
-     * which is packaged with this application.
-     */
-    public native String stringFromJNI();
 
     @Override
     public void onClick(View v) {
@@ -76,7 +79,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 break;
 
         }
-
 
     }
 }
