@@ -6,4 +6,125 @@
     android:layout_height="match_parent"
     tools:context=".activity.HookActivity">
 
+    <Button
+        android:id="@+id/btn_hook_package_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="package-check"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_exception_check"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_hook_exception_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="exception-check"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_file_check"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_package_check"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_hook_file_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="file-check"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_exception_check"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btn_hook_class_check"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="class-check"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_jni_pkg"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_exception_check" />
+
+    <Button
+        android:id="@+id/btn_hook_jni_pkg"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="package-jni"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_jni_file"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_class_check"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_exception_check" />
+
+    <Button
+        android:id="@+id/btn_hook_jni_file"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="file-jni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_jni_pkg"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_exception_check" />
+
+    <Button
+        android:id="@+id/btn_hook_xhook_jni"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="xhook-jni"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_jni_substrate"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_jni_pkg" />
+
+    <Button
+        android:id="@+id/btn_hook_jni_substrate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="substrate-jni"
+        app:layout_constraintEnd_toStartOf="@+id/btn_hook_jni_inline"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_xhook_jni"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_jni_pkg" />
+
+    <Button
+        android:id="@+id/btn_hook_jni_inline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="inline-jni"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_hook_jni_substrate"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_jni_pkg" />
+
+    <Button
+        android:id="@+id/btn_hook_jni_plt"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="20dp"
+        android:text="plt-jni"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_hook_jni_substrate" />
 </androidx.constraintlayout.widget.ConstraintLayout>
