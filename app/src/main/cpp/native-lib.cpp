@@ -82,3 +82,23 @@ JNIEXPORT jint JNICALL
 Java_com_song_check_activity_HookActivity_pltCheck(JNIEnv *env, jobject instance) {
     return pltHookCheck();
 }
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_song_check_activity_EmulatorActivity_getArch(JNIEnv *env, jobject instance) {
+    return getArch();
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_song_check_activity_EmulatorActivity_getApiVersion(JNIEnv *env, jobject instance) {
+    return getApiVersion();
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_song_check_activity_EmulatorActivity_getMapsArch(JNIEnv *env, jobject instance) {
+    char dst[BUF_SIZE_64] = UNKNOWN;
+    getMapsArch(dst);
+    return env->NewStringUTF(dst);
+}

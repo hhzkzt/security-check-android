@@ -32,4 +32,23 @@ jboolean buildCheck();
  */
 jboolean bluetoothCheck();
 
+/**
+ * 获取当前
+ * @return
+ */
+int getApiVersion();
+
+/**
+ * 获取当前架构类型
+ * @return
+ */
+int getArch();
+
+/**
+ * 从 maps 读取当前运行的架构
+ * @param dst
+ * @return
+ */
+int getMapsArch(char *dst);
+
 #endif //SECURITY_CHECK_ANDROID_EMULATOR_CHECK_H
