@@ -22,7 +22,8 @@ add_library( # Sets the name of the library.
         utils.cpp
         app-utils.cpp
         virtual-apk-check.cpp
-        root-check.cpp)
+        root-check.cpp
+        hook-check.cpp)
 
 # Searches for a specified prebuilt library and stores the path as a
 # variable. Because CMake includes system libraries in the search path by
