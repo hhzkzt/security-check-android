@@ -33,28 +33,23 @@ int moreOpenCheck() {
 
         FILE *f = NULL;
         f = popen(path, "r");
-        if (f == NULL) {
+        if (f != NULL) {
+            char buff[BUF_SIZE_32];
+            if (fgets(buff, BUF_SIZE_32, f)) {
+                if (strlen(buff) != 0) {
+                    pclose(f);
+                    return 0;
+                }
+            }
+            pclose(f);
+            return 1;
+        } else {
             LOGD("file pointer is null.");
             return 2;
-        } else {
-            // 读取 shell 命令内容
-            char buff[BUF_SIZE_32];
-            if (fgets(buff, BUF_SIZE_32, f) == NULL) {
-                LOGD("ls data error: %s", strerror(errno));
-                pclose(f);
-                return 1;
-            }
-            LOGD("ls data: %s", buff);
-            if (strlen(buff) == 0) {
-                pclose(f);
-                return 1;
-            } else {
-                pclose(f);
-                return 0;
-            }
         }
 
     } else {
         return 2;
     }
+
 }

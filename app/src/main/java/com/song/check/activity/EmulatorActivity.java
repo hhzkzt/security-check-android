@@ -27,6 +27,8 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
     private Button buildCheckJniBtn;
     private Button bluetoothCheckJniBtn;
 
+    private Button sysinfoBtn;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,6 +46,8 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
         buildCheckJniBtn = ((Button) findViewById(R.id.btn_jni_build_check));
         bluetoothCheckJniBtn = ((Button) findViewById(R.id.btn_jni_bluetooth_check));
 
+        sysinfoBtn = ((Button) findViewById(R.id.btn_get_sysinfo));
+
         buildCheckBtn.setOnClickListener(this);
         qemuCheckBtn.setOnClickListener(this);
         propertyCheckBtn.setOnClickListener(this);
@@ -55,6 +59,8 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
         thermalCheckJniBtn.setOnClickListener(this);
         buildCheckJniBtn.setOnClickListener(this);
         bluetoothCheckJniBtn.setOnClickListener(this);
+
+        sysinfoBtn.setOnClickListener(this);
     }
 
     @Override
@@ -101,6 +107,13 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
                 LogUtils.i(TAG, "bluetoothCheck: " + bluetoothCheck);
                 Toast.makeText(this, "bluetoothCheck: " + bluetoothCheck, Toast.LENGTH_SHORT).show();
                 break;
+            case R.id.btn_get_sysinfo:
+                int apiVersion = getApiVersion();
+                int arch = getArch();
+                String mapsArch = getMapsArch();
+                LogUtils.i(TAG, "sysinfo: " + apiVersion + "#" + arch + "#" + mapsArch);
+                Toast.makeText(this, "sysinfo: " + apiVersion + "#" + arch + "#" + mapsArch, Toast.LENGTH_SHORT).show();
+                break;
             default:
                 break;
         }
@@ -114,4 +127,11 @@ public class EmulatorActivity extends AppCompatActivity implements View.OnClickL
     public native boolean buildCheck();
 
     public native boolean bluetoothCheck();
+
+    public native int getArch();
+
+    public native int getApiVersion();
+
+    public native String getMapsArch();
+
 }

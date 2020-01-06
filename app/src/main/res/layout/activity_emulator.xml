@@ -125,6 +125,21 @@
         android:layout_marginLeft="8dp"
         android:layout_marginTop="20dp"
         android:text="bluetooth-jni"
+        app:layout_constraintEnd_toStartOf="@+id/btn_get_sysinfo"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btn_jni_thermal_check" />
+
+    <Button
+        android:id="@+id/btn_get_sysinfo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="sys-info"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toEndOf="@+id/btn_jni_bluetooth_check"
         app:layout_constraintTop_toBottomOf="@+id/btn_jni_thermal_check" />
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -4,6 +4,7 @@
 
 #include <dirent.h>
 #include <string.h>
+#include <stdio.h>
 #include "include/emulator-check.h"
 #include "include/utils.h"
 #include "include/log.h"
@@ -83,4 +84,62 @@ jboolean bluetoothCheck() {
         return JNI_TRUE;
     }
     return JNI_FALSE;
+}
+
+/**
+ * 获取当前
+ * @return
+ */
+int getApiVersion() {
+    return __ANDROID_API__;
+}
+
+/**
+ * 获取当前架构类型，可能存在当前架构
+ * @return
+ */
+int getArch() {
+
+    int arch = 0;
+#if defined(__x86_64__) || defined(__i386__)
+    arch = 1;
+#else
+    arch = 0;
+#endif
+    return arch;
+
+}
+
+/**
+ * 从 maps 读取当前运行的架构
+ * @param dst
+ * @return
+ */
+int getMapsArch(char *dst) {
+    char path[BUF_SIZE_32];
+    sprintf(path, "/proc/%d/maps", getpid());
+
+    // 读取数据
+    FILE *f = NULL;
+    char buf[BUF_SIZE_512];
+    f = fopen(path, "r");
+
+    if (f != NULL) {
+        while (fgets(buf, BUF_SIZE_512, f)) {
+            // fgets 当读取 (n-1) 个字符时，或者读取到换行符时，或者到达文件末尾时，它会停止，具体视情况而定。
+            LOGI("maps: %s", buf);
+            if (strstr(buf, "libnative-lib.so")) {
+                // 解析对应架构
+                char *arch = strstr(buf, "/lib/");
+                if (arch != NULL) {
+                    strncpy(dst, arch, BUF_SIZE_64);
+                }
+                fclose(f);
+                return 1;
+            }
+        }
+    }
+
+    fclose(f);
+    return 0;
 }
