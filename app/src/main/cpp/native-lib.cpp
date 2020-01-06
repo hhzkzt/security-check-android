@@ -4,8 +4,19 @@
 #include "include/virtual-apk-check.h"
 #include "include/root-check.h"
 #include "include/hook-check.h"
+#include "include/debug-check.h"
+#include "include/daemon-check.h"
 #include "include/utils.h"
 #include "include/log.h"
+
+/**
+ * 构造函数初始化
+ * @return
+ */
+void init() __attribute__((constructor)) {
+//    ptraceCheck();
+//    startDaemon();
+}
 
 extern "C"
 JNIEXPORT jboolean JNICALL
@@ -81,4 +92,30 @@ extern "C"
 JNIEXPORT jint JNICALL
 Java_com_song_check_activity_HookActivity_pltCheck(JNIEnv *env, jobject instance) {
     return pltHookCheck();
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_song_check_activity_EmulatorActivity_getArch(JNIEnv *env, jobject instance) {
+    return getArch();
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_song_check_activity_EmulatorActivity_getApiVersion(JNIEnv *env, jobject instance) {
+    return getApiVersion();
+}
+
+extern "C"
+JNIEXPORT jstring JNICALL
+Java_com_song_check_activity_EmulatorActivity_getMapsArch(JNIEnv *env, jobject instance) {
+    char dst[BUF_SIZE_64] = UNKNOWN;
+    getMapsArch(dst);
+    return env->NewStringUTF(dst);
+}
+
+extern "C"
+JNIEXPORT jint JNICALL
+Java_com_song_check_activity_DebugActivity_tracerPidCheck__(JNIEnv *env, jobject instance) {
+    return tracerPidCheck();
 }
